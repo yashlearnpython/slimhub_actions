@@ -44,7 +44,6 @@ sudo -EH apt-fast -qq -y purge \
   azure-cli session-manager-plugin \
   brltty byobu htop \
   buildah hhvm kubectl packagekit* podman podman-plugins skopeo \
-  chromium-browser firebird* firefox google-chrome* xvfb \
   clang-8 clang-format-8 libclang-common-8-dev libclang1-8 cpp-7 cpp-8 lld-8 llvm-8* libllvm8 liblldb-8 \
   esl-erlang ghc-* groff-base rake r-base* r-cran-* r-doc-* r-recommended ruby* swig* \
   g++-7* gcc-7* g++-8* gcc-8* gfortran* \
@@ -91,7 +90,7 @@ parallel --use-cpus-instead-of-cores sudo rm -rf -- {} 2>/dev/null ::: /opt/host
 printf "Removing Microsoft vcpkg, Miniconda, Leiningen, Pulumi...\n"
 parallel --use-cpus-instead-of-cores sudo rm -rf -- {} 2>/dev/null ::: /usr/local/share/vcpkg /usr/local/bin/vcpkg ::: /usr/share/miniconda ::: /usr/bin/conda /usr/local/lib/lein /usr/local/bin/lein /usr/local/bin/pulumi*
 printf "Removing Browser-based Webdrivers, PHP, Composer, Database Management Program Remains...\n"
-parallel --use-cpus-instead-of-cores sudo rm -rf -- {} 2>/dev/null ::: /usr/share/java/selenium-server-standalone.jar /usr/local/share/phantomjs* /usr/local/bin/phantomjs /usr/local/share/chrome_driver /usr/bin/chromedriver /usr/local/share/gecko_driver /usr/bin/geckodriver ::: /etc/php /usr/bin/composer /usr/local/bin/phpunit ::: /var/lib/mysql /etc/mysql /usr/local/bin/sqlcmd /usr/local/bin/bcp /usr/local/bin/session-manager-plugin
+parallel --use-cpus-instead-of-cores sudo rm -rf -- {} 2>/dev/null ::: /usr/share/java/selenium-server-standalone.jar /usr/local/share/phantomjs* /usr/local/bin/phantomjs /usr/local/share/gecko_driver /usr/bin/geckodriver ::: /etc/php /usr/bin/composer /usr/local/bin/phpunit ::: /var/lib/mysql /etc/mysql /usr/local/bin/sqlcmd /usr/local/bin/bcp /usr/local/bin/session-manager-plugin
 printf "Removing Julia, Rust, Cargo, Rubygems, Rake, Swift, Haskell, Erlang...\n"
 parallel --use-cpus-instead-of-cores sudo rm -rf -- {} 2>/dev/null ::: /usr/local/julia* /usr/bin/julia ::: /usr/share/rust /home/runner/.cargo /home/runner/.rustup /home/runner/.ghcup ::: /usr/local/bin/rake /usr/local/bin/rdoc /usr/local/bin/ri /usr/local/bin/racc /usr/local/bin/rougify ::: /usr/local/bin/bundle /usr/local/bin/bundler /var/lib/gems ::: /usr/share/swift /usr/local/bin/swift /usr/local/bin/swiftc /usr/bin/ghc /usr/local/.ghcup /usr/local/bin/stack /usr/local/bin/rebar3 /usr/share/sbt /usr/bin/sbt /usr/bin/go /usr/bin/gofmt
 printf "Removing Various Cloud CLI Tools, Different Kubernetes & Container Management Programs...\n"
@@ -102,7 +101,7 @@ echo "::endgroup::"
 
 echo "::group::Clearing Unwanted Environment Variables"
 {
-  sudo sed -i -e '/^PATH=/d;/hostedtoolcache/d;/^AZURE/d;/^SWIFT/d;/^DOTNET/d;/DRIVER/d;/^CHROME/d;/HASKELL/d;/^JAVA/d;/^SELENIUM/d;/^GRAALVM/d;/^ANT/d;/^GRADLE/d;/^LEIN/d;/^CONDA/d;/^VCPKG/d;/^ANDROID/d;/^PIPX/d;/^HOMEBREW/d;' /etc/environment
+  sudo sed -i -e '/^PATH=/d;/hostedtoolcache/d;/^AZURE/d;/^SWIFT/d;/^DOTNET/d;/DRIVER/d;/HASKELL/d;/^JAVA/d;/^SELENIUM/d;/^GRAALVM/d;/^ANT/d;/^GRADLE/d;/^LEIN/d;/^CONDA/d;/^VCPKG/d;/^ANDROID/d;/^PIPX/d;/^HOMEBREW/d;' /etc/environment
   sudo sed -i '1i PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' /etc/environment
   sed -i '/HOME\/\.local\/bin/d' /home/runner/.bashrc
   source /home/runner/.bashrc
