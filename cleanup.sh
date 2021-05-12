@@ -26,8 +26,6 @@ _xcode_cleanup() {
   for i in Xcode_10*.app Xcode_11*.app Xcode_12*.app; do
     if [ $i != "$USED_XCODE" ]; then
       printf "Removing %s...\n" "$i"
-      parallel --use-cpus-instead-of-cores --jobs 200% sudo rm -rf {} ::: ${i}/Contents/Developer/Platforms/*
-      parallel --use-cpus-instead-of-cores --jobs 200% sudo rm -rf {} ::: ${i}/Contents/*
       sudo rm -rf ${i}
     fi
   done
